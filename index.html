@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a1330"><title>Attrape-moi si tu peux ! — Édition Olympique</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <button id="burger" class="icon-btn">☰</button>
+  <div class="brand">
+    <div class="rings"><span style="background:#2f8fe0"></span><span style="background:#ffcc33"></span><span style="background:#22c55e"></span><span style="background:#ef4444"></span><span style="background:#a855f7"></span></div>
+    <b>🏃 ATTRAPE-MOI</b><small>SI TU PEUX !</small>
+  </div>
+  <button id="soundBtn" class="icon-btn">🔊</button>
+</header>
+<main>
+<section id="home" class="screen active">
+  <div class="hero">
+    <div class="torch">🔥</div>
+    <h1>Attrape-moi<br><em>si tu peux !</em></h1>
+    <p>Lance. Cours. Rattrape. Survis.</p>
+    <div class="rings"><span style="background:#2f8fe0;width:11px;height:11px"></span><span style="background:#ffcc33;width:11px;height:11px"></span><span style="background:#22c55e;width:11px;height:11px"></span><span style="background:#ef4444;width:11px;height:11px"></span><span style="background:#a855f7;width:11px;height:11px"></span></div>
+  </div>
+  <div class="card home-card">
+    <button id="soloBtn" class="primary">🤖 Solo contre l'IA</button>
+    <button id="localBtn" class="secondary">👥 Jouer en local</button>
+    <button id="onlineBtn" class="secondary">🌐 Multijoueur en ligne</button>
+    <button id="rulesBtn" class="ghost">📖 Comment jouer ?</button>
+  </div>
+  <footer>Édition Olympique • by twagirumukiza</footer>
+</section>
+
+<section id="solo" class="screen"><button class="back">←</button><h2>Solo contre l'IA</h2><div class="card">
+  <label>Ton nom</label><input id="soloName" maxlength="18" value="Moi">
+  <label>Vitesse de réflexion de l'IA</label><div id="aiSpeed" class="segmented three"><button data-ms="1800">Lente</button><button data-ms="1000" class="selected">Normale</button><button data-ms="450">Rapide</button></div>
+  <p class="hint">Les dés restent totalement aléatoires : l'IA ne triche pas.</p><button id="startSolo" class="primary">🔫 Démarrer la poursuite</button>
+</div></section>
+
+<section id="local" class="screen"><button class="back">←</button><h2>Course locale</h2><div class="card">
+  <label>Nombre d'athlètes</label><div id="playerCount" class="segmented"><button data-n="2" class="selected">2</button><button data-n="3">3</button><button data-n="4">4</button><button data-n="5">5</button><button data-n="6">6</button></div>
+  <div id="names"></div><button id="startLocal" class="primary">🔫 Démarrer la course</button>
+</div></section>
+
+<section id="online" class="screen"><button class="back">←</button><h2>Multijoueur en ligne</h2><div class="card">
+  <label>Ton nom</label><input id="onlineName" maxlength="18" placeholder="Ton nom">
+  <label>Nombre maximum d'athlètes</label><div id="onlineCount" class="segmented"><button data-n="2">2</button><button data-n="3">3</button><button data-n="4" class="selected">4</button><button data-n="5">5</button><button data-n="6">6</button></div>
+  <button id="createRoom" class="primary">Créer un salon</button><div class="or"><span>ou</span></div><input id="roomCodeInput" maxlength="6" placeholder="CODE DU SALON"><button id="joinRoom" class="secondary">Rejoindre le salon</button><p id="onlineError" class="error"></p>
+</div></section>
+
+<section id="lobby" class="screen"><button id="leaveLobby" class="back">←</button><h2>Salon <span id="roomCode"></span></h2><div class="card">
+ <div class="sharebox"><div><small>Code</small><strong id="roomCodeBig"></strong></div><button id="shareRoom">Partager 🔗</button></div><div id="lobbyPlayers" class="lobby-players"></div><p id="waitingText"></p><button id="startOnline" class="primary hidden">🔫 Lancer la course</button><p id="lobbyError" class="error"></p>
+</div></section>
+
+<section id="game" class="screen game-screen"><div class="game-head"><button id="quitGame" class="icon-btn">✕</button><div><b id="modeLabel">COURSE</b><small id="trackLabel"></small></div><button id="gameSound" class="icon-btn">🔊</button></div>
+ <div id="turnBanner"></div><div class="board-wrap"><svg id="board" viewBox="0 0 700 820"></svg><div id="floatingFx" class="floating-fx-layer"></div><div class="center-ui"><div id="dice"><div class="die" id="die1">⚀</div><div class="die" id="die2">⚀</div></div><button id="rollBtn" class="roll">LANCER<br><span>LES DÉS</span></button></div>
+  <div id="cardOverlay" class="card-overlay hidden">
+    <div class="card-overlay-inner">
+      <h3 id="cardOverlayTitle">Choisis ta carte…</h3>
+      <div class="card-pair" id="cardPair">
+        <button class="game-card" data-side="0"><span class="card-face">🎴</span></button>
+        <button class="game-card" data-side="1"><span class="card-face">🎴</span></button>
+      </div>
+      <div id="cardReveal" class="card-reveal hidden">
+        <div id="cardRevealIcon" class="card-reveal-icon"></div>
+        <div id="cardRevealLabel" class="card-reveal-label"></div>
+        <div id="cardRevealText" class="card-reveal-text"></div>
+      </div>
+    </div>
+  </div>
+ </div><div id="playersBar" class="players-bar"></div><div id="status" class="status"></div>
+ <div id="cardHistory" class="card-history"></div>
+</section>
+
+<section id="rules" class="screen"><button class="back">←</button><h2>Comment jouer ?</h2><div class="card rules">
+ <div class="rule"><b>🎲 Lance</b><p>Chaque athlète lance deux dés à son tour et avance de leur somme, en tournant dans le sens inverse des aiguilles d'une montre.</p></div>
+ <div class="rule"><b>🏃 Poursuis</b><p>Tous avancent dans le même sens. Tu poursuis le premier coureur encore en course devant toi.</p></div>
+ <div class="rule"><b>💥 Attrape</b><p>Si ton déplacement atteint ou dépasse ce coureur, il est rattrapé et éliminé.</p></div>
+ <div class="rule"><b>🌀 Rétrécissement</b><p>Après une élimination, la piste se contracte. Cette contraction n'élimine jamais directement un joueur.</p></div>
+ <div class="rule"><b>🚪 Abandon</b><p>En ligne, quitter une partie en cours élimine le joueur.</p></div>
+ <div class="rule"><b>🏆 Gagne</b><p>Le dernier athlète en piste remporte la médaille d'or !</p></div>
+</div></section>
+</main>
+
+<aside id="drawer">
+  <button id="closeDrawer">✕</button>
+  <h3>🏃 Attrape-moi si tu peux !</h3>
+  <button data-go="home">🏠 Accueil</button>
+  <button data-go="rules">📖 Règles du jeu</button>
+  <label class="switchline">Sons <input id="soundToggle" type="checkbox" checked></label>
+  <div class="speedbox">
+    <label>Vitesse de déplacement</label>
+    <div id="speedCtrl" class="segmented three">
+      <button data-speed="lente" class="selected">Lente</button>
+      <button data-speed="normale">Normale</button>
+      <button data-speed="rapide">Rapide</button>
+    </div>
+  </div>
+  <small>Édition Olympique • by twagirumukiza</small>
+</aside>
+<div id="shade"></div>
+
+<div id="modal" class="modal hidden"><div class="modal-card"><div id="confetti"></div><span class="medal">🏅</span><h2 id="modalTitle"></h2><p id="modalText"></p><button id="replayBtn" class="primary">Rejouer</button><button id="homeBtn" class="ghost">Accueil</button></div></div>
+<div id="resumeModal" class="modal hidden"><div class="modal-card"><span class="medal">🏃</span><h2>Partie en cours</h2><p id="resumeText">Tu as une course non terminée.</p><button id="resumeYes" class="primary">Reprendre la course</button><button id="resumeNo" class="ghost">Nouvelle partie</button></div></div>
+<script src="script.js"></script>
+</body></html>

@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "catchmeRoomsV3": {
+      "$roomId": {
+        ".read": "auth != null",
+        ".write": "auth != null"
+      }
+    }
+  }
+}
